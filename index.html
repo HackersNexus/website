@@ -114,11 +114,7 @@
         .hello {
             color: #ff6347;
         }
- body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+ 
 
 nav ul {
   list-style: none;
@@ -144,15 +140,22 @@ nav ul li a:hover {
   background-color: #111;
 }
 
+.entries-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .entry {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 20px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
+  flex-basis: 30%; /* Adjust the basis to fit the layout */
 }
 
 .entry a {
