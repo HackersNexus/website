@@ -8,7 +8,11 @@ async function fetchData() {
     data.forEach(entry => {
       const div = document.createElement('div');
       div.className = 'entry';
-      
+
+      const link = document.createElement('a');
+      link.href = entry.url;
+      link.target = "_blank"; // Open in new tab
+
       const img = document.createElement('img');
       img.src = entry.image;
       img.alt = entry.title;
@@ -23,8 +27,9 @@ async function fetchData() {
 
       textDiv.appendChild(title);
       textDiv.appendChild(subtitle);
-      div.appendChild(img);
-      div.appendChild(textDiv);
+      link.appendChild(img);
+      link.appendChild(textDiv);
+      div.appendChild(link);
       dynamicContent.appendChild(div);
     });
   } catch (error) {
@@ -32,5 +37,7 @@ async function fetchData() {
   }
 }
 
-setInterval(fetchData, 5000); // Fetch new data every 5 seconds
-window.onload = fetchData; // Fetch data when the page loads
+if (document.getElementById('dynamic-content')) {
+  setInterval(fetchData, 5000); // Fetch new data every 5 seconds
+  window.onload = fetchData; // Fetch data when the page loads
+}
