@@ -25,7 +25,7 @@ async function fetchData() {
       const title = document.createElement('h1');
       title.textContent = entry.title;
 
-      const subtitle = document.createElement('h2');
+      const subtitle = document.createElement('p');
       subtitle.textContent = entry.subtitle;
 
       textDiv.appendChild(title);
