@@ -5,9 +5,6 @@ async function fetchData() {
     const dynamicContent = document.getElementById('dynamic-content');
     dynamicContent.innerHTML = ''; // Clear existing content
 
-    const container = document.createElement('div');
-    container.className = 'entries-container';
-
     data.forEach(entry => {
       const div = document.createElement('div');
       div.className = 'entry';
@@ -33,10 +30,8 @@ async function fetchData() {
       link.appendChild(img);
       link.appendChild(textDiv);
       div.appendChild(link);
-      container.appendChild(div);
+      dynamicContent.appendChild(div);
     });
-
-    dynamicContent.appendChild(container);
   } catch (error) {
     console.error('Error fetching data:', error);
   }
