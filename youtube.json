@@ -1,10 +1,7 @@
-{
-    "kali": [
-        "https://www.youtube.com/embed/LipCwq1QE3s?si=9RNYL-xYVchOHtcZ",
+[{
+    "1": [
+        "https://www.youtube.com/embed/Myk_0B8Zb8o?si=8zbyF7k9Kr3MUdqd",
         "Description for Kali video"
-    ],
-    "another_video": [
-        "https://www.youtube.com/embed/ANOTHER_VIDEO_ID",
-        "Description for Another Video"
     ]
-}
+
+}]
