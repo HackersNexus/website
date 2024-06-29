@@ -17,21 +17,19 @@
             font-family: Arial, sans-serif;
         }
         video, iframe {
-            width: 80%;
-            max-width: 800px;
-            height: auto;
+            width: 100%;
+            height: 100%;
         }
         .description {
-            width: 80%;
-            max-width: 800px;
-            margin-top: 20px;
+            width: 100%;
+            padding: 20px;
             text-align: center;
             white-space: pre-wrap; /* Preserve line breaks and spaces */
         }
     </style>
 </head>
 <body>
-    <div id="playerContainer"></div>
+    <div id="playerContainer" style="flex: 1;"></div>
     <div class="description" id="videoDescription"></div>
     <script>
         // Function to get URL parameters
@@ -54,7 +52,7 @@
         if (videoPath) {
             if (videoPath.includes('youtube.com') || videoPath.includes('youtu.be')) {
                 // Embed YouTube video
-                const videoId = videoPath.split('v=')[1] || videoPath.split('/').pop();
+                let videoId = videoPath.split('v=')[1] || videoPath.split('/').pop();
                 const ampersandPosition = videoId.indexOf('&');
                 if (ampersandPosition != -1) {
                     videoId = videoId.substring(0, ampersandPosition);
