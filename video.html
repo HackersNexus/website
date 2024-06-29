@@ -7,22 +7,30 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
         }
-        iframe {
+        video {
             width: 80%;
-            height: 80%;
             max-width: 800px;
-            max-height: 450px;
+        }
+        .description {
+            width: 80%;
+            max-width: 800px;
+            margin-top: 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <iframe id="videoPlayer" frameborder="0" allowfullscreen></iframe>
+    <video id="videoPlayer" controls></video>
+    <div class="description" id="videoDescription"></div>
     <script>
         // Function to get URL parameters
         function getQueryParams() {
@@ -34,17 +42,23 @@
             return params;
         }
 
-        // Set the video source based on the URL parameter
+        // Set the video source and description based on the URL parameters
         const params = getQueryParams();
-        const videoId = params['id'];
+        const videoPath = params['id'];
+        const description = params['description'];
 
-        if (videoId) {
+        if (videoPath) {
             const videoPlayer = document.getElementById('videoPlayer');
-            videoPlayer.src = `https://www.youtube.com/embed/${videoId}`;
+            videoPlayer.src = videoPath;
         } else {
-            alert("No video ID provided!");
+            alert("No video path provided!");
+        }
+
+        if (description) {
+            document.getElementById('videoDescription').textContent = description;
+        } else {
+            document.getElementById('videoDescription').textContent = "No description provided.";
         }
     </script>
-    <p>Description.....</p>
 </body>
 </html>
