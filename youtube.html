@@ -3,161 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hackers Nexus</title>
-    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDHHxMSy2pQLRv6HVdBgG5cESCClW3ZA8qBw&s">
+    <title>Video Player</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        video, iframe {
+            width: 80%;
+            max-width: 800px;
+            height: auto;
+        }
+        .description {
+            width: 80%;
+            max-width: 800px;
+            margin-top: 20px;
+            text-align: center;
+            white-space: pre-wrap; /* Preserve line breaks and spaces */
+        }
+    </style>
 </head>
 <body>
-    <style>
-        .video-container {
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 95%;   
-        }
-        .post {
-            background-color: #fff;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 100%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .post h2 {
-            font-size: 28px;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        .post p {
-            font-size: 18px;
-            margin: 0;
-        }
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-  background-color: #333;
-  margin: 0;
-  display: flex;
-  justify-content: space-around;
-}
-
-nav ul li {
-  display: inline;
-}
-
-nav ul li a {
-  display: block;
-  padding: 14px 20px;
-  text-decoration: none;
-  color: white;
-}
-
-nav ul li a:hover {
-  background-color: #111;
-}
-
-#dynamic-content {
-  display: flex;
-  flex-direction: column; /* Arrange items vertically */
-  align-items: flex-start; /* Align items to the left */
-  padding-left: 20px; /* Add padding to the left */
-}
-
-.entry {
-  display: flex;
-  align-items: center;
-  margin: 10px 0; /* Margin between entries */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-  width: 95%; /* Set a fixed width for each entry */
-}
-
-.entry a {
-  display: flex;
-  text-decoration: none;
-  color: inherit;
-}
-
-.entry img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 20px;
-  object-fit: cover;
-}
-
-.text-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.text-container h1 {
-  margin: 0;
-  font-size: 1.5em;
-}
-
-.text-container p {
-  margin: 0;
-  font-size: 1em;
-  color: #555;
-}
-
-        
-    </style>
-    <div id="video-container">
-        <!-- Video iframe will be inserted here -->
-    </div>
-
+    <div id="playerContainer"></div>
+    <div class="description" id="videoDescription"></div>
     <script>
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        // Function to get URL parameters
+        function getQueryParams() {
+            const params = {};
+            window.location.search.substr(1).split("&").forEach(function (item) {
+                const pair = item.split("=");
+                params[pair[0]] = decodeURIComponent(pair[1].replace(/\+/g, " "));
+            });
+            return params;
         }
 
-        var videoName = getParameterByName('video');
+        // Set the video source and description based on the URL parameters
+        const params = getQueryParams();
+        const videoPath = params['id'];
+        const description = params['dis'];
 
-        fetch('youtube-videos.txt')
-            .then(response => response.json())
-            .then(data => {
-                var videoUrl = data[videoName];
-                if (videoUrl) {
-                    var iframe = document.createElement('iframe');
-                    iframe.width = '560';
-                    iframe.height = '315';
-                    iframe.src = videoUrl;
-                    iframe.title = 'YouTube video player';
-                    iframe.frameborder = '0';
-                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-                    iframe.allowFullscreen = true;
-                    document.getElementById('video-container').appendChild(iframe);
-                } else {
-                    document.getElementById('video-container').innerHTML = '<p>Video not found.</p>';
+        const playerContainer = document.getElementById('playerContainer');
+
+        if (videoPath) {
+            if (videoPath.includes('youtube.com') || videoPath.includes('youtu.be')) {
+                // Embed YouTube video
+                const videoId = videoPath.split('v=')[1] || videoPath.split('/').pop();
+                const ampersandPosition = videoId.indexOf('&');
+                if (ampersandPosition != -1) {
+                    videoId = videoId.substring(0, ampersandPosition);
                 }
-            })
-            .catch(error => {
-                console.error('Error fetching video:', error);
-                document.getElementById('video-container').innerHTML = '<p>Error loading video.</p>';
-            });
+                playerContainer.innerHTML = `<iframe id="videoPlayer" src="https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            } else {
+                // Play local video file
+                playerContainer.innerHTML = `<video id="videoPlayer" controls><source src="${videoPath}" type="video/mp4">Your browser does not support the video tag.</video>`;
+            }
+        } else {
+            alert("No video path provided!");
+        }
+
+        if (description) {
+            document.getElementById('videoDescription').textContent = description;
+        } else {
+            document.getElementById('videoDescription').textContent = "No description provided.";
+        }
     </script>
-    <div class="post" id='dynamic-content' >
-        <h2 id='title'>Loading...</h2>
-        <p id='subtitle'>Loading ...etc</p>
-    </div>
-    <script src="script.js"></script>
 </body>
 </html>
