@@ -123,7 +123,7 @@ nav ul li a:hover {
 
         var videoName = getParameterByName('video');
 
-        fetch('website/videos/videos.json')
+        fetch('videos.json')
             .then(response => response.json())
             .then(data => {
                 var videoUrl = data[videoName];
