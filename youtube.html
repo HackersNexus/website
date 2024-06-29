@@ -17,19 +17,21 @@
             font-family: Arial, sans-serif;
         }
         video, iframe {
-            width: 100%;
-            height: 100%;
+            width: 80%;
+            height: 50%;
+            max-width: 800px;
         }
         .description {
-            width: 100%;
-            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            margin-top: 20px;
             text-align: center;
             white-space: pre-wrap; /* Preserve line breaks and spaces */
         }
     </style>
 </head>
 <body>
-    <div id="playerContainer" style="flex: 1;"></div>
+    <div id="playerContainer"></div>
     <div class="description" id="videoDescription"></div>
     <script>
         // Function to get URL parameters
