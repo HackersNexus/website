@@ -54,7 +54,7 @@
 <body>
     <div class="form-container">
         <h1>Hackers Nexus Admission Form</h1>
-        <form action="/submit" method="post">
+        <form action="https://api.github.com/repos/YOUR_USERNAME/YOUR_REPOSITORY/dispatches" method="post">
             <label for="phone_number">Phone Number:</label>
             <input type="text" id="phone_number" name="phone_number" required>
             
@@ -68,8 +68,32 @@
             <input type="number" id="age" name="age" required>
             
             <input type="submit" value="Submit">
-            <script src="app.js"></script>
         </form>
     </div>
+    <script>
+        document.querySelector('form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = {
+                event_type: 'new_admission',
+                client_payload: {
+                    phone_number: formData.get('phone_number'),
+                    name: formData.get('name'),
+                    course: formData.get('course'),
+                    age: formData.get('age')
+                }
+            };
+            await fetch(e.target.action, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Authorization': 'token YOUR_GITHUB_PERSONAL_ACCESS_TOKEN',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            alert('Thank you, your submission has been received!');
+        });
+    </script>
 </body>
 </html>
