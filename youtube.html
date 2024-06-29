@@ -131,7 +131,7 @@ nav ul li a:hover {
 
         var videoName = getParameterByName('video');
 
-        fetch('videos.txt')
+        fetch('youtube-videos.txt')
             .then(response => response.json())
             .then(data => {
                 var videoUrl = data[videoName];
