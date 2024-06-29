@@ -202,7 +202,13 @@ nav ul li a:hover {
     width:25%;
     
 }
-
+    .search-container {
+        display : flex; 
+        justify-content : centre ; 
+        align-items : center;
+        border : 2px solid black ;
+        
+    }
     .results {
       margin-top: 20px;
     }
@@ -242,9 +248,10 @@ nav ul li a:hover {
 
     <div class="navbar">
         <h1>Hackers Nexus</h1>
-       
+        <div class="search-container">
         <input type="text" id="search-input" placeholder="Search by title or subtitle">
         <button onclick="searchData()">Search</button>
+        </div>
        
         <div class="menu">
             <a href="/website/Admission_Forme/form.html" class="hello">Admission</a>
