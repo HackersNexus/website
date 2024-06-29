@@ -200,11 +200,16 @@ nav ul li a:hover {
 
 #search-input {
     width:70%;
+    height : 40px ; 
+    border : 1px solid #ccc ;
+    border-radius : 20px 0 0 20px ;
+    box-shadow : 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size : 16px; 
     
 }
     .search-conten {
         text-align : centre ; 
-        border : 2px solid red ; 
+        border : 2px solid  ; 
         padding : 15px ; 
     }
     .search-container {
@@ -213,7 +218,15 @@ nav ul li a:hover {
         align-items : center;
         width : 45% ; 
         
-        border : 2px solid black ;0
+        border : 2px solid  ;
+    .search-button {
+        width : 50px; 
+        height : 40px ; 
+        background-color : #007BFF; 
+        border : none ; 
+        border-radius : 0 20px 20px 0 ;
+        box-shadow : 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
         
     }
     .results {
@@ -257,7 +270,7 @@ nav ul li a:hover {
         <h1>Hackers Nexus</h1>
         <div class="search-container">
         <input type="text" id="search-input" placeholder="Search by title or subtitle">
-        <button onclick="searchData()">Search</button>
+        <button onclick="searchData()" id="search-button">Search</button>
         </div>
        
         <div class="menu">
