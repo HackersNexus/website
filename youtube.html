@@ -23,7 +23,7 @@
 
         var videoName = getParameterByName('video');
 
-        fetch('videos.json')
+        fetch('youtube.json')
             .then(response => response.json())
             .then(data => {
                 var videoData = data[videoName];
