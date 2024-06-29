@@ -199,6 +199,39 @@ nav ul li a:hover {
 }
 
 
+.search-container {
+      margin: 20px;
+    }
+    .results {
+      margin-top: 20px;
+    }
+    .result-item {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .result-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    .result-item .text-content {
+      display: flex;
+      flex-direction: column;
+    }
+    .result-item .text-content .title {
+      font-weight: bold;
+    }
+    .result-item .text-content .subtitle {
+      margin-top: 5px;
+    }
+    
+
     </style>
 </head>
 <body>
@@ -209,6 +242,10 @@ nav ul li a:hover {
     <div class="navbar">
         <h1>Hackers Nexus</h1>
         <div class="menu">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search by title or subtitle">
+                <button onclick="searchData()">Search</button>
+            </div>
             <a href="/website/Admission_Forme/form.html" class="hello">Admission</a>
             <a href="#">Sign In</a>
             <a href="#">Sign Up</a>
@@ -227,6 +264,60 @@ nav ul li a:hover {
             </div>
         </div>
     </div>
+
+
+
+    <script>
+    let data = [];
+
+    // Load JSON data
+    fetch('data.json')
+      .then(response => response.json())
+      .then(json => {
+        data = json;
+        console.log('Data loaded:', data);  // Debugging: log loaded data
+      });
+
+    // Search function
+    function searchData() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      console.log('Search query:', query);  // Debugging: log search query
+      const resultsContainer = document.getElementById('results');
+      resultsContainer.innerHTML = '';
+
+      const filteredData = data.filter(item =>
+        item.title.toLowerCase().includes(query) || item.subtitle.toLowerCase().includes(query)
+      );
+
+      console.log('Filtered data:', filteredData);  // Debugging: log filtered data
+
+      if (filteredData.length > 0) {
+        filteredData.forEach(item => {
+          const div = document.createElement('div');
+          div.classList.add('result-item');
+          div.innerHTML = `
+            <img src="${item.image}" alt="${item.title}">
+            <div class="text-content">
+              <span class="title">${item.title}</span>
+              <span class="subtitle">${item.subtitle}</span>
+            </div>
+          `;
+          div.onclick = () => {
+            window.open(item.url, '_blank');
+          };
+          resultsContainer.appendChild(div);
+        });
+      } else {
+        resultsContainer.innerHTML = '<p>No results found</p>';
+      }
+    }
+  </script>
+
+
+
+
+
+    
     <div class="post" id='dynamic-content' >
         <h2 id='title'>Loading....</h2>
         <p id='subtitle'>loading ...etc</p>
