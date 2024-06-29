@@ -25,6 +25,7 @@
             max-width: 800px;
             margin-top: 20px;
             text-align: center;
+            white-space: pre-wrap; /* Preserve line breaks and spaces */
         }
     </style>
 </head>
@@ -45,7 +46,7 @@
         // Set the video source and description based on the URL parameters
         const params = getQueryParams();
         const videoPath = params['id'];
-        const description = params['description'];
+        const description = params['dis'];
 
         if (videoPath) {
             const videoPlayer = document.getElementById('videoPlayer');
