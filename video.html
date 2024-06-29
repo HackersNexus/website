@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+        }
+        video {
+            width: 80%;
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <video id="videoPlayer" controls></video>
+    <script>
+        // Function to get URL parameters
+        function getQueryParams() {
+            const params = {};
+            window.location.search.substr(1).split("&").forEach(function (item) {
+                const pair = item.split("=");
+                params[pair[0]] = decodeURIComponent(pair[1]);
+            });
+            return params;
+        }
+
+        // Set the video source based on the URL parameter
+        const params = getQueryParams();
+        const videoPath = params['id'];
+
+        if (videoPath) {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = videoPath;
+        } else {
+            alert("No video path provided!");
+        }
+    </script>
+</body>
+</html>
