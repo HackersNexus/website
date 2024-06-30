@@ -2,7 +2,15 @@
     {
         "1": [
             "https://www.youtube.com/embed/381RLFXKUfU?si=FmV3yF1v8itNekYM",
-            "Description for Kali video"
+            "HOW TO INSTALL KALI 
+
+**COMMANDS**
+
+•termux-setup-storage
+•pkg install wget
+•wget -O install-nethunter-termux https://offs.ec/2MceZWr
+•chmod +x install-nethunter-termux
+•./install-nethunter-termux"
         ]
     },
     {
