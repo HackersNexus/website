@@ -2,15 +2,7 @@
     {
         "1": [
             "https://www.youtube.com/embed/381RLFXKUfU?si=FmV3yF1v8itNekYM",
-            """HOW TO INSTALL KALI 
-
-**COMMANDS**
-
-•termux-setup-storage
-•pkg install wget
-•wget -O install-nethunter-termux https://offs.ec/2MceZWr
-•chmod +x install-nethunter-termux
-•./install-nethunter-termux"""
+            "HOW TO INSTALL KALI \n**COMMANDS**\n\n•termux-setup-storage\n•pkg install wget\n•wget -O install-nethunter-termux https://offs.ec/2MceZWr\n•chmod +x install-nethunter-termux\n•./install-nethunter-termux"
         ]
     },
     {
