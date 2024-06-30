@@ -7,7 +7,7 @@
 </head>
 <body>
     <div id="video-container">
-        <!-- Video player and description will be inserted here -->
+        <!-- Video iframe and description will be inserted here -->
     </div>
 
     <script>
@@ -35,35 +35,22 @@
                 }
 
                 if (videoData) {
-                    var videoType = videoData[0];
-                    var videoUrl = videoData[1];
-                    var description = videoData[2].replace(/\n/g, '<br>');
+                    var videoUrl = videoData[0];
+                    var description = videoData[1].replace(/\n/g, '<br>');
 
-                    var videoElement;
-                    if (videoType === 'youtube') {
-                        videoElement = document.createElement('iframe');
-                        videoElement.width = '560';
-                        videoElement.height = '315';
-                        videoElement.src = videoUrl;
-                        videoElement.title = 'YouTube video player';
-                        videoElement.frameborder = '0';
-                        videoElement.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-                        videoElement.allowFullscreen = true;
-                    } else if (videoType === 'local') {
-                        videoElement = document.createElement('video');
-                        videoElement.width = '560';
-                        videoElement.height = '315';
-                        videoElement.controls = true;
-                        var sourceElement = document.createElement('source');
-                        sourceElement.src = videoUrl;
-                        sourceElement.type = 'video/mp4';
-                        videoElement.appendChild(sourceElement);
-                    }
+                    var iframe = document.createElement('iframe');
+                    iframe.width = '560';
+                    iframe.height = '315';
+                    iframe.src = videoUrl;
+                    iframe.title = 'YouTube video player';
+                    iframe.frameborder = '0';
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    iframe.allowFullscreen = true;
 
                     var descriptionParagraph = document.createElement('p');
                     descriptionParagraph.innerHTML = description;
 
-                    document.getElementById('video-container').appendChild(videoElement);
+                    document.getElementById('video-container').appendChild(iframe);
                     document.getElementById('video-container').appendChild(descriptionParagraph);
                 } else {
                     document.getElementById('video-container').innerHTML = '<p>Video not found.</p>';
