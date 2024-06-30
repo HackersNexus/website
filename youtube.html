@@ -36,7 +36,7 @@
 
                 if (videoData) {
                     var videoUrl = videoData[0];
-                    var description = videoData[1];
+                    var description = videoData[1].replace(/\n/g, '<br>');
 
                     var iframe = document.createElement('iframe');
                     iframe.width = '560';
@@ -48,7 +48,7 @@
                     iframe.allowFullscreen = true;
 
                     var descriptionParagraph = document.createElement('p');
-                    descriptionParagraph.textContent = description;
+                    descriptionParagraph.innerHTML = description;
 
                     document.getElementById('video-container').appendChild(iframe);
                     document.getElementById('video-container').appendChild(descriptionParagraph);
