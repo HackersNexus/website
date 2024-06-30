@@ -8,29 +8,30 @@
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #000;
-            color: #fff;
+            background-color: #fff;
+            color: #000;
             font-family: Arial, sans-serif;
         }
-        video {
-            width: 80%;
-            max-width: 800px;
+        video, iframe {
+            width: 100%;
+            height: 40vh; /* Adjust to 40% of the height */
+            object-fit: cover; /* Cover the video container */
         }
         .description {
-            width: 80%;
+            width: 100%;
             max-width: 800px;
             margin-top: 20px;
-            text-align: center;
+            padding: 0 20px; /* Add padding for better readability */
+            text-align: left; /* Align text to the left */
             white-space: pre-wrap; /* Preserve line breaks and spaces */
         }
     </style>
 </head>
 <body>
-    <video id="videoPlayer" controls></video>
+    <div id="playerContainer"></div>
     <div class="description" id="videoDescription"></div>
     <script>
         // Function to get URL parameters
@@ -38,7 +39,7 @@
             const params = {};
             window.location.search.substr(1).split("&").forEach(function (item) {
                 const pair = item.split("=");
-                params[pair[0]] = decodeURIComponent(pair[1]);
+                params[pair[0]] = decodeURIComponent(pair[1].replace(/\+/g, " "));
             });
             return params;
         }
@@ -48,9 +49,32 @@
         const videoPath = params['id'];
         const description = params['dis'];
 
+        const playerContainer = document.getElementById('playerContainer');
+
         if (videoPath) {
-            const videoPlayer = document.getElementById('videoPlayer');
-            videoPlayer.src = videoPath;
+            if (videoPath.includes('youtube.com') || videoPath.includes('youtu.be')) {
+                // Embed YouTube video
+                let videoId = videoPath.split('v=')[1] || videoPath.split('/').pop();
+                const ampersandPosition = videoId.indexOf('&');
+                if (ampersandPosition != -1) {
+                    videoId = videoId.substring(0, ampersandPosition);
+                }
+                const videoUrl = `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0`;
+                const iframe = document.createElement('iframe');
+                iframe.width = '560';
+                iframe.height = '315';
+                iframe.src = videoUrl;
+                iframe.title = 'YouTube video player';
+                iframe.frameborder = '0';
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                iframe.allowFullscreen = true;
+                iframe.style.width = '100%';
+                iframe.style.height = '40vh';
+                playerContainer.appendChild(iframe);
+            } else {
+                // Play local video file
+                playerContainer.innerHTML = `<video id="videoPlayer" controls><source src="${videoPath}" type="video/mp4">Your browser does not support the video tag.</video>`;
+            }
         } else {
             alert("No video path provided!");
         }
