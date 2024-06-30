@@ -15,23 +15,26 @@
             color: #000;
             font-family: Arial, sans-serif;
         }
+        .video-container {
+            width: 100%;
+            max-width: 560px;
+        }
         video, iframe {
             width: 100%;
-            height: 40vh; /* Adjust to 40% of the height */
+            height: 315px; /* Standard YouTube video height */
             object-fit: cover; /* Cover the video container */
         }
         .description {
             width: 100%;
-            max-width: 800px;
+            max-width: 560px;
             margin-top: 20px;
-            padding: 0 20px; /* Add padding for better readability */
             text-align: left; /* Align text to the left */
             white-space: pre-wrap; /* Preserve line breaks and spaces */
         }
     </style>
 </head>
 <body>
-    <div id="playerContainer"></div>
+    <div class="video-container" id="playerContainer"></div>
     <div class="description" id="videoDescription"></div>
     <script>
         // Function to get URL parameters
@@ -68,8 +71,6 @@
                 iframe.frameborder = '0';
                 iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
                 iframe.allowFullscreen = true;
-                iframe.style.width = '100%';
-                iframe.style.height = '40vh';
                 playerContainer.appendChild(iframe);
             } else {
                 // Play local video file
