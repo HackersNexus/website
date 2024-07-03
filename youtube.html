@@ -22,44 +22,61 @@
         }
 
         var videoId = getParameterByName('video');
+        var videoUrl = getParameterByName('url');
 
-        fetch('youtube.json')
-            .then(response => response.json())
-            .then(data => {
-                let videoData;
-                for (let obj of data) {
-                    if (obj[videoId]) {
-                        videoData = obj[videoId];
-                        break;
+        if (videoId) {
+            fetch('youtube.json')
+                .then(response => response.json())
+                .then(data => {
+                    let videoData;
+                    for (let obj of data) {
+                        if (obj[videoId]) {
+                            videoData = obj[videoId];
+                            break;
+                        }
                     }
-                }
 
-                if (videoData) {
-                    var videoUrl = videoData[0];
-                    var description = videoData[1].replace(/\n/g, '<br>');
+                    if (videoData) {
+                        var youtubeUrl = videoData[0];
+                        var description = videoData[1].replace(/\n/g, '<br>');
 
-                    var iframe = document.createElement('iframe');
-                    iframe.width = '560';
-                    iframe.height = '315';
-                    iframe.src = videoUrl;
-                    iframe.title = 'YouTube video player';
-                    iframe.frameborder = '0';
-                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-                    iframe.allowFullscreen = true;
+                        var iframe = document.createElement('iframe');
+                        iframe.width = '560';
+                        iframe.height = '315';
+                        iframe.src = youtubeUrl;
+                        iframe.title = 'YouTube video player';
+                        iframe.frameborder = '0';
+                        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                        iframe.allowFullscreen = true;
 
-                    var descriptionParagraph = document.createElement('p');
-                    descriptionParagraph.innerHTML = description;
+                        var descriptionParagraph = document.createElement('p');
+                        descriptionParagraph.innerHTML = description;
 
-                    document.getElementById('video-container').appendChild(iframe);
-                    document.getElementById('video-container').appendChild(descriptionParagraph);
-                } else {
-                    document.getElementById('video-container').innerHTML = '<p>Video not found.</p>';
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching video:', error);
-                document.getElementById('video-container').innerHTML = '<p>Error loading video.</p>';
-            });
+                        document.getElementById('video-container').appendChild(iframe);
+                        document.getElementById('video-container').appendChild(descriptionParagraph);
+                    } else {
+                        document.getElementById('video-container').innerHTML = '<p>Video not found.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching video:', error);
+                    document.getElementById('video-container').innerHTML = '<p>Error loading video.</p>';
+                });
+        } else if (videoUrl) {
+            var videoElement = document.createElement('video');
+            videoElement.width = 560;
+            videoElement.height = 315;
+            videoElement.controls = true;
+
+            var sourceElement = document.createElement('source');
+            sourceElement.src = videoUrl;
+            sourceElement.type = 'video/mp4';
+
+            videoElement.appendChild(sourceElement);
+            document.getElementById('video-container').appendChild(videoElement);
+        } else {
+            document.getElementById('video-container').innerHTML = '<p>No video specified.</p>';
+        }
     </script>
 </body>
 </html>
